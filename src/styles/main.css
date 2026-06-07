@@ -1,0 +1,123 @@
+/*=============================*/
+/*video de background*/
+/*=============================*/
+.bg-video {
+    position: absolute;
+    z-index: -2;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.bg-video .video {
+    width: 100vw;
+    height: 100vh;
+}
+
+.bg-video::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, 
+                                       rgba(0, 0, 0, 0.85) 50%, 
+                                       rgba(0, 0, 0, 1) 100%);
+}
+
+/*=====================================*/
+/*container principal com todo conteúdo*/
+/*=====================================*/
+.container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100vh;
+}
+
+/*=====================================*/
+/*painel esquerdo*/
+/*=====================================*/
+.painel-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    min-width: 13.8rem;
+}
+
+/*score points*/
+.painel-left-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/*card info*/
+.painel-left-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 100%;
+}
+
+.painel-left-card-info p {
+    font-size: 0.6rem;
+}
+
+#card-name {
+    font-size: 0.5rem;
+}
+
+/*=====================================*/
+/*field*/
+/*=====================================*/
+
+/*container do campo e cartas*/
+.field-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.1rem;
+}
+
+.field-box {
+    width: 90%;
+}
+
+/*cartas em duelo*/
+.battle-cards-action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0 0 0;
+}
+
+/*botão carrega próxima batalha*/
+.battle-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*classe para dimensionar o tamanho das cartas do jogo*/
+.card {
+    height: 6.2rem;
+    width: 4.6rem;
+    border-radius: 3px;
+}
+
+.cards-box {
+    height: 6.5rem;
+    width: 100%;
+}

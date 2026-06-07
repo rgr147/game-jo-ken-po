@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- favicon -->
+    <link rel="icon" href="./src/assets/favicon/favicon.ico">
+    <!-- reset css -->
+    <link rel="stylesheet" href="./src/styles/reset.css">
+    <!-- framework css-->
+    <link rel="stylesheet" href="./src/styles/containers_and_frames.css">
+    <link rel="stylesheet" href="./src/styles/buttons.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="./src/styles/main.css">
+
+    <!-- import font default -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">   
+
+    <title>Jo-Ken-Po</title>
+</head>    
+
+<body>
+
+    <div class="bg-video">
+        <video class="video" autoplay muted loop>
+            <source src="./src/assets/video/yugi.mp4" type="video/mp4"/> 
+        </video>
+    </div>
+
+    <div class="container">
+        <!--painel esquerdo com informacoes do jogo-->
+        <div class="painel-left framed-golden-2">
+            <div class="painel-left-score framed">
+                <span id="score-win">Win : </span>
+                <span id="score-lose">Lose: </span>
+            </div>
+
+            <div class="painel-left-menu_avatar">
+                <img id="card-image">
+            </div>
+
+            <div class="painel-left-card-info framed">
+                <p id="card-name">name card</p>
+                <p id="card-type">Type card</p>
+            </div>
+        </div>
+        <!--fim painel esquerdo com informacoes do jogo-->        
+        
+        <!--campo de duelo e cartas em maos-->                
+        <div class="field-container">
+            <div class="field-box"> 
+                <!--cartas na mao do inimigo-->
+                <div class="cards-box framed" id="enemy-cards">
+                </div>
+                <!--fim cartas na mao do inimigo-->
+
+                <!--cartas em duelo-->
+                <div class="field-battle-cards">
+                    <div class="battle-cards-action">
+                        <div class="card-infield">
+                            <img class="card" id="player-card">
+                        </div>
+
+                        <img height="100px" src="./src/assets/icons/millenium2.png"/>
+                        
+                        <div class="card-infield">
+                            <img class="card" id="enemy-card">
+                        </div>
+                    </div>
+
+                    <div class="battle-button">
+                        <button class="rpgui-button" onclick="resetDuel()">Next Battle</button>
+                    </div>
+
+                </div>                
+                <!--fim cartas em duelo-->
+                
+                <!--cartas na mao do player-->
+                <div class="cards-box framed" id="player-cards">
+                    
+                </div>
+                <!--fim cartas na mao do player-->
+            </div>
+        </div>
+        <!--fim campo de duelo e cartas em maos-->
+    </div>
+
+    <script src="./src/scripts/engine.js" defer></script>
+</body>
+
+</html>
