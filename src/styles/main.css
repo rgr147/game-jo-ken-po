@@ -112,12 +112,16 @@
 
 /*classe para dimensionar o tamanho das cartas do jogo*/
 .card {
-    height: 6.2rem;
-    width: 4.6rem;
+    height: 3.5rem;
+    width: 4rem;
     border-radius: 3px;
+
 }
 
 .cards-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     height: 6.5rem;
     width: 100%;
 }
