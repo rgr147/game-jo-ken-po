@@ -5,7 +5,7 @@ const state = {
         scoreWin: document.getElementById("score-win"),
         scoreLose: document.getElementById("score-lose"),
     },
-    cardsDescription: {
+    cardDescription: {
         avatar: document.getElementById("card-image"),
         name: document.getElementById("card-name"),
         type: document.getElementById("card-type"),
@@ -72,16 +72,41 @@ async function createCardImage (idCard, fieldSide) {
     cardImage.setAttribute("src",`${state.paths.images}card-back.png`);
     cardImage.setAttribute("data-id", idCard);
 
+    //essa função é para telas touchscreen
     if (fieldSide === playerSides.player1) {
         cardImage.addEventListener("click", () => {
             setCardsField(cardImage.getAttribute("data-id"));
         });
     }
-    cardImage.addEventListener("mouseover", () => {
+
+    //essa função é para telas sem touchscreen//
+    /*
+    if (fieldSide === playerSides.player1) {
+        cardImage.addEventListener("click", () => {
+            setCardsField(cardImage.getAttribute("data-id"));
+        });
+    }
+    */
+
+    //essa funcao é para telas touch//
+    cardImage.addEventListener("touchstart", () => {
         drawCardDescription(idCard);
     });
-
+    
+    //essa funcao será usada em telas sem touchscreen//
+    /*
+    cardImage.addEventListener("mouseover", () => {
+         drawCardDescription(idCard);
+    });
+    */
+    
     return cardImage;
+}
+
+async function drawCardDescription(idCard) {
+    state.cardDescription.avatar.src = cardData[idCard].image;
+    state.cardDescription.name.textContent = cardData[idCard].name;
+    state.cardDescription.type.textContent = "Attribute: " + cardData[idCard].type;
 }
 
 async function drawCards (numberOfCards, fieldSide) {
