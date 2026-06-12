@@ -24,12 +24,13 @@
 </head>    
 
 <body>
-
+    <!--video loop em background-->
     <div class="bg-video">
         <video class="video" autoplay muted loop>
             <source src="./src/assets/video/yugi.mp4" type="video/mp4"/> 
         </video>
     </div>
+    <!--fim video loop em background-->
 
     <div class="container">
         <!--painel esquerdo com informacoes do jogo-->
@@ -53,37 +54,33 @@
         <!--campo de duelo e cartas em maos-->                
         <div class="field-container">
             <div class="field-box"> 
-                <!--cartas na mao do inimigo-->
-                <div class="cards-box framed" id="enemy-cards">
+                <!--cartas na mão do computador-->
+                <div class="cards-box framed" id="hand-computer">
                 </div>
-                <!--fim cartas na mao do inimigo-->
+                <!--fim cartas na mão do computador-->
 
-                <!--cartas em duelo-->
+                <!--cartas em campo-->
                 <div class="field-battle-cards">
                     <div class="battle-cards-action">
                         <div class="card-infield">
-                            <img class="card" id="player-card">
+                            <img class="card" id="player-move-card">
                         </div>
-
                         <img height="100px" src="./src/assets/icons/millenium2.png"/>
-                        
                         <div class="card-infield">
-                            <img class="card" id="computer-card">
+                            <img class="card" id="computer-card-card">
                         </div>
                     </div>
 
                     <div class="battle-button">
                         <button class="rpgui-button" id="next-duel" onclick="resetDuel()">Next Battle</button>
                     </div>
-
                 </div>                
-                <!--fim cartas em duelo-->
+                <!--fim cartas em campo-->
                 
-                <!--cartas na mao do player-->
-                <div class="cards-box framed" id="player-cards">
-                    
+                <!--cartas na mão do player-->
+                <div class="cards-box framed" id="hand-player">
                 </div>
-                <!--fim cartas na mao do player-->
+                <!--fim cartas na mão do player-->
             </div>
         </div>
         <!--fim campo de duelo e cartas em maos-->

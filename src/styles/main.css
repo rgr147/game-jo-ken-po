@@ -66,6 +66,7 @@
     align-items: left;
     justify-content: center;
     width: 100%;
+    gap: .5rem;
 }
 
 .painel-left-card-info p {
@@ -110,14 +111,21 @@
     align-items: center;
 }
 
-/*classe para dimensionar o tamanho das cartas do jogo*/
+/*cartas da mão e campo*/
 .card {
     height: 3.5rem;
     width: 4rem;
     border-radius: 3px;
-
+    transition: transform 0.2s;
 }
 
+.card:hover {
+    transform: scale(1.2);
+    box-shadow: 4px 4px 4px; 
+}
+
+
+/*container onde ficam as cartas das mãos*/
 .cards-box {
     display: flex;
     flex-direction: row;
@@ -126,6 +134,7 @@
     width: 100%;
 }
 
+/*preview da imagem da carta no menu lateral*/
 #card-image {
     height: 8rem;
 }

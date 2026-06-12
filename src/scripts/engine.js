@@ -1,22 +1,26 @@
 const state = {
     score: {
-        win: 0,
-        lose: 0,   
-        scoreWin: document.getElementById("score-win"),
-        scoreLose: document.getElementById("score-lose"),
+        pointsInicialWin: 0,
+        pointsInitialDefeat: 0,
+        winScore: document.getElementById("score-win"),
+        defeatScore: document.getElementById("score-lose"),
     },
-    cardDescription: {
+    cardPreview: {
         avatar: document.getElementById("card-image"),
         name: document.getElementById("card-name"),
         type: document.getElementById("card-type"),
     },
-    playersSides: {
-        player1: document.getElementById("player-cards"),
-        computer: document.getElementById("enemy-cards"),
+    handCardsPlayers: { 
+        player: document.getElementById("hand-player"),
+        computer: document.getElementById("hand-computer"),
     },
-    fieldCards: {
-        player: document.getElementById("player-card"),
-        computer: document.getElementById("computer-card"),
+    playersSides: {
+        player: "hand-player",
+        computer: "hand-computer",
+    },
+    cardsInField: {
+        player: document.getElementById("player-move-card"),
+        computer: document.getElementById("computer-move-card"),
     },
     actions: {
         buttonNext: document.getElementById("next-duel"),
@@ -26,10 +30,8 @@ const state = {
     }
 }
 
-const playerSides = {
-    player1: "player-cards",
-    computer: "enemy-cards",
-}
+console.log(state.playersSides.player);
+console.log(state.handCardsPlayers.player)
 
 const cardData = [
     {
@@ -60,23 +62,48 @@ const cardData = [
 
 async function getRandomIdCard () {
     const randomId = Math.floor(Math.random() * cardData.length);
-    console.log(`primeiro id aleatorio foi: ${randomId}`);
     
     return cardData[randomId].id;
 }
 
 async function createCardImage (idCard, fieldSide) {
-    console.log(`id da carta é: ${idCard}`);
     const cardImage = document.createElement("img");
     cardImage.classList.add("card");
     cardImage.setAttribute("src",`${state.paths.images}card-back.png`);
     cardImage.setAttribute("data-id", idCard);
 
     //essa função é para telas touchscreen
-    if (fieldSide === playerSides.player1) {
-        cardImage.addEventListener("click", () => {
-            setCardsField(cardImage.getAttribute("data-id"));
+    if (fieldSide === state.playersSides.player) {
+        
+        //essa funcao é para telas touch//
+        cardImage.addEventListener("touchstart", () => {
+            drawcardPreview(idCard);
         });
+    
+        //aqui será um teste de identificar que arrastei a carta pra cima para jogar//
+
+        let startY = 0;
+
+        cardImage.addEventListener("touchstart", (event) => {
+            // Mantém sua ação atual
+            drawcardPreview(idCard);
+
+            // Guarda a posição inicial do toque
+            startY = event.touches[0].clientY;
+        });
+
+        cardImage.addEventListener("touchend", (event) => {
+            const endY = event.changedTouches[0].clientY;
+
+        // Se subiu mais de 50 pixels
+        if (startY - endY > 50) {
+            console.log("Arrastou para cima");
+
+            // Coloque aqui a ação desejada
+            // playCard(idCard);
+        }
+        });
+        //fim aqui será um teste de identificar que arrastei a carta pra cima para jogar//
     }
 
     //essa função é para telas sem touchscreen//
@@ -88,25 +115,22 @@ async function createCardImage (idCard, fieldSide) {
     }
     */
 
-    //essa funcao é para telas touch//
-    cardImage.addEventListener("touchstart", () => {
-        drawCardDescription(idCard);
-    });
+    
     
     //essa funcao será usada em telas sem touchscreen//
     /*
     cardImage.addEventListener("mouseover", () => {
-         drawCardDescription(idCard);
+         drawcardPreview(idCard);
     });
     */
     
     return cardImage;
 }
 
-async function drawCardDescription(idCard) {
-    state.cardDescription.avatar.src = cardData[idCard].image;
-    state.cardDescription.name.textContent = cardData[idCard].name;
-    state.cardDescription.type.textContent = "Attribute: " + cardData[idCard].type;
+async function drawcardPreview(idCard) {
+    state.cardPreview.avatar.src = cardData[idCard].image;
+    state.cardPreview.name.textContent = cardData[idCard].name;
+    state.cardPreview.type.textContent = "Attribute: " + cardData[idCard].type;
 }
 
 async function drawCards (numberOfCards, fieldSide) {
@@ -119,8 +143,8 @@ async function drawCards (numberOfCards, fieldSide) {
 }
 
 function init () {
-    drawCards(5,playerSides.player1);
-    drawCards(5,playerSides.computer);
+    drawCards(5,state.playersSides.player);
+    drawCards(5,state.playersSides.computer);
 }
 
 init();
