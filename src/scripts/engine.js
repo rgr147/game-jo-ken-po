@@ -30,9 +30,6 @@ const state = {
     }
 }
 
-console.log(state.playersSides.player);
-console.log(state.handCardsPlayers.player)
-
 const cardData = [
     {
         id: 0,
@@ -74,20 +71,14 @@ async function createCardImage (idCard, fieldSide) {
 
     //essa função é para telas touchscreen
     if (fieldSide === state.playersSides.player) {
-        
-        //essa funcao é para telas touch//
-        cardImage.addEventListener("touchstart", () => {
-            drawcardPreview(idCard);
-        });
-    
-        //aqui será um teste de identificar que arrastei a carta pra cima para jogar//
 
         let startY = 0;
 
         cardImage.addEventListener("touchstart", (event) => {
+
             // Mantém sua ação atual
             drawcardPreview(idCard);
-
+            
             // Guarda a posição inicial do toque
             startY = event.touches[0].clientY;
         });
@@ -105,24 +96,6 @@ async function createCardImage (idCard, fieldSide) {
         });
         //fim aqui será um teste de identificar que arrastei a carta pra cima para jogar//
     }
-
-    //essa função é para telas sem touchscreen//
-    /*
-    if (fieldSide === playerSides.player1) {
-        cardImage.addEventListener("click", () => {
-            setCardsField(cardImage.getAttribute("data-id"));
-        });
-    }
-    */
-
-    
-    
-    //essa funcao será usada em telas sem touchscreen//
-    /*
-    cardImage.addEventListener("mouseover", () => {
-         drawcardPreview(idCard);
-    });
-    */
     
     return cardImage;
 }
