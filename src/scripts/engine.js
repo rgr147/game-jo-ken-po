@@ -1,3 +1,6 @@
+/*======================================
+
+========================================*/
 const state = {
     score: {
         pointsInicialWin: 0,
@@ -30,6 +33,9 @@ const state = {
     }
 }
 
+/*==============================================
+base de dados - objeto com descrição das cartas
+================================================*/
 const cardData = [
     {
         id: 0,
@@ -61,15 +67,54 @@ const cardData = [
 função para gerar número aleatório
 ===================================*/
 async function getRandomIdCard () {
+
     const randomId = Math.floor(Math.random() * cardData.length);
     
     return cardData[randomId].id;
+}
+
+/*=============================================
+bloqueia as cartas da mão após jogar uma carta
+===============================================*/
+async function blockAllCards() {
+
+    //selecionando as cartas que estão na mão do computador
+    let cards = document.querySelector("#hand-computer");
+    console.log(cards);
+        
+}
+
+/*==============================
+colocar as cartas no campo
+================================*/
+async function setCardInField(idCard) {
+
+    await blockAllCards();
+    
+    //selecionando a carta que o computador vai jogar
+    let computerCardMove = await getRandomIdCard(); 
+
+
+    state.cardsInField.player.style.display = "block";
+    state.cardsInField.computer.style.display = "block";
+    
+    state.cardsInField.player.src = cardData[idCard].image;
+    await new Promise(resolve => setTimeout(resolve, 250));
+    state.cardsInField.computer.src = cardData[computerCardMove].image
+
+    let duelResults = await checkDuelResults(cardId, computerCardMove);
+
+    //atualiza o placar
+    await scoreUpdate();
+    await drawButton();
+
 }
 
 /*========================
 entrega as cartas do jogo
 ==========================*/
 async function createCardImage (idCard, fieldSide) {
+
     const cardImage = document.createElement("img");
     cardImage.classList.add("card");
     cardImage.setAttribute("src",`${state.paths.images}card-back.png`);
@@ -90,13 +135,11 @@ async function createCardImage (idCard, fieldSide) {
         });
 
         cardImage.addEventListener("touchend", (event) => {
+
             const endY = event.changedTouches[0].clientY;
 
             if (startY - endY > 50) {
-                console.log("Arrastou para cima");
-
-                state.cardsInField.player.src = cardData[idCard].image;
-            
+                setCardInField(idCard);
             }
         });
     }
@@ -128,8 +171,8 @@ async function drawCards (numberOfCards, fieldSide) {
 /*=====================================
 função que atualiza o placar do jogo
 =======================================*/
-function score (winPoint, defeatPoint){
-    console.log(state.score.pointsInicialWin)
+function scoreUpdate (winPoint, defeatPoint){
+    
     state.score.winScore.textContent = `Win : ${winPoint}`;
     state.score.defeatScore.textContent = `Lose: ${defeatPoint}`;
 }
@@ -139,9 +182,9 @@ função responsável por iniciar o jogo
 =======================================*/
 function init () {
 
-    score(state.score.pointsInicialWin,state.score.pointsInitialDefeat);
+    scoreUpdate(state.score.pointsInicialWin,state.score.pointsInitialDefeat);
     drawCards(5,state.playersSides.player);
     drawCards(5,state.playersSides.computer);
 }
 
-init();
+init(); //start do código

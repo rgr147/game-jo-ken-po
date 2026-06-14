@@ -140,6 +140,9 @@
     height: 8rem;
 }
 
+/*cartas colocadas em campo*/
 #player-move-card, #computer-move-card{
-    height: 5rem;
+    height: 6rem;
+    width: 4.4rem;
 }
+
