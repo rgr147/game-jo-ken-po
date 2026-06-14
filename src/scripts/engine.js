@@ -57,12 +57,18 @@ const cardData = [
     },
 ]
 
+/*=================================
+função para gerar número aleatório
+===================================*/
 async function getRandomIdCard () {
     const randomId = Math.floor(Math.random() * cardData.length);
     
     return cardData[randomId].id;
 }
 
+/*========================
+entrega as cartas do jogo
+==========================*/
 async function createCardImage (idCard, fieldSide) {
     const cardImage = document.createElement("img");
     cardImage.classList.add("card");
@@ -86,26 +92,30 @@ async function createCardImage (idCard, fieldSide) {
         cardImage.addEventListener("touchend", (event) => {
             const endY = event.changedTouches[0].clientY;
 
-        // Se subiu mais de 50 pixels
-        if (startY - endY > 50) {
-            console.log("Arrastou para cima");
+            if (startY - endY > 50) {
+                console.log("Arrastou para cima");
 
-            // Coloque aqui a ação desejada
-            // playCard(idCard);
-        }
+                state.cardsInField.player.src = cardData[idCard].image;
+            
+            }
         });
-        //fim aqui será um teste de identificar que arrastei a carta pra cima para jogar//
     }
     
     return cardImage;
 }
 
+/*=====================================================
+mostra detalher da carta selecionada no painel lateral
+=======================================================*/
 async function drawcardPreview(idCard) {
     state.cardPreview.avatar.src = cardData[idCard].image;
     state.cardPreview.name.textContent = cardData[idCard].name;
     state.cardPreview.type.textContent = "Attribute: " + cardData[idCard].type;
 }
 
+/*=============================================
+função para distribuir as cartas aleatóriamente
+===============================================*/
 async function drawCards (numberOfCards, fieldSide) {
     for (let i = 0; i < numberOfCards; i++) {
         const randomIdCard = await getRandomIdCard();
@@ -115,7 +125,21 @@ async function drawCards (numberOfCards, fieldSide) {
     }
 }
 
+/*=====================================
+função que atualiza o placar do jogo
+=======================================*/
+function score (winPoint, defeatPoint){
+    console.log(state.score.pointsInicialWin)
+    state.score.winScore.textContent = `Win : ${winPoint}`;
+    state.score.defeatScore.textContent = `Lose: ${defeatPoint}`;
+}
+
+/*=====================================
+função responsável por iniciar o jogo
+=======================================*/
 function init () {
+
+    score(state.score.pointsInicialWin,state.score.pointsInitialDefeat);
     drawCards(5,state.playersSides.player);
     drawCards(5,state.playersSides.computer);
 }
