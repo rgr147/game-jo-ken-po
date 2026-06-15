@@ -24,6 +24,7 @@ const state = {
     cardsInField: {
         player: document.getElementById("player-move-card"),
         computer: document.getElementById("computer-move-card"),
+        fieldBattle: document.querySelector(".field-battle-cards"),
     },
     actions: {
         buttonNext: document.getElementById("next-duel"),
@@ -69,7 +70,6 @@ função para gerar número aleatório
 async function getRandomIdCard () {
 
     const randomId = Math.floor(Math.random() * cardData.length);
-    
     return cardData[randomId].id;
 }
 
@@ -78,10 +78,24 @@ bloqueia as cartas da mão após jogar uma carta
 ===============================================*/
 async function blockAllCards() {
 
-    //selecionando as cartas que estão na mão do computador
-    let cards = document.querySelector("#hand-computer");
+    // selecionando as cartas que estão na mão do computador
+    let hand = document.getElementById("hand-player");
+    console.log("elemento buscado na mão do player:");
+    
+    let cards = hand.querySelectorAll("img");
+    console.log("Cartas da mão:");
     console.log(cards);
-        
+
+    state.handCardsPlayers.player.classList.add("block-all-cards", "hand-player-translate");
+    state.handCardsPlayers.computer.classList.add("block-all-cards", "hand-computer-translate");
+    state.cardsInField.fieldBattle.classList.add("field-battle-cards-view");
+    // hand.classList.add("block-all-cards");
+    // cards.forEach(card => card.classList.a   dd("block-all-cards"));
+
+    // let imgElements = hand.querySelector("img");
+    // console.log("cartas da mão do player:");
+    // console.log(imgElements);
+   
 }
 
 /*==============================
@@ -93,7 +107,6 @@ async function setCardInField(idCard) {
     
     //selecionando a carta que o computador vai jogar
     let computerCardMove = await getRandomIdCard(); 
-
 
     state.cardsInField.player.style.display = "block";
     state.cardsInField.computer.style.display = "block";

@@ -89,6 +89,7 @@
     align-items: center;
     width: 100%;
     padding: 0.1rem;
+    overflow: hidden;
 }
 
 .field-box {
@@ -146,3 +147,38 @@
     width: 4.4rem;
 }
 
+
+/*===============================
+efeitos de duelo
+=================================*/
+
+.field-battle-cards-view {
+    transform: scale(1.5);
+    gap: 1px;
+}
+
+.block-all-cards {
+    position: relative;
+    height: 6.5rem;
+    width: 100%;
+}
+
+.block-all-cards::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #000000;
+    opacity: 0.6;
+    pointer-events: all; /* blocks clicks */   
+}
+
+.hand-player-translate {
+    transform: translateY(70px);
+}
+
+.hand-computer-translate {
+    transform: translateY(-70px);
+}
